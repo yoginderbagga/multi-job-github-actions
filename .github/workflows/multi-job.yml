@@ -29,11 +29,12 @@ jobs:
 
 
       - name: Compile and Build Application
+        id: date_step
 # Declare the variable at Step Level
         env:
           COMPILER_FLAGS: "-03"
 
-      - id: date_step    
+          
         run: |
           echo "Running build scripts ..."
           echo "Building the app: $GLOBAL_APP_NAME"
