@@ -1,3 +1,4 @@
+yoginderbagga@fedora:~/multi-job-github-actions$ cat .github/workflows/multi-job.yml 
 #Goal: Building a multi-job workflow from scratch with three jobs : build, test, and deploy
 name: Multi-Jobs Workflow
 
@@ -10,7 +11,18 @@ on:
 env:
   GLOBAL_APP_NAME: "MyAmazingApp"  
 
+  # NEW: Lint the code for any error  
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Run Linter
+        run: |
+          echo "Scanning code for style and syntax errors..."
+          echo "Linting passed successfully!"
 
 # 1. Build the job
   build:
@@ -75,7 +87,3 @@ jobs:
 
       - name: Deploy to Production
         run: echo "Deploy applications..."
-
-
-
-
