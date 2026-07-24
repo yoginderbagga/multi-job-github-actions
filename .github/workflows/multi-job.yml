@@ -34,6 +34,10 @@ jobs:
           echo "Environment is: $BUILD_ENVIRONMENT"
           echo "Using Flags: $COMPILER_FLAGS"
 
+      - name: Identity Check
+        run: echo "This workflow was triggered by user ${{ github.actor }}"
+
+
 # 2. Test the job (Runs only if the previous Build succeeds)
 
   test:
@@ -58,3 +62,7 @@ jobs:
 
       - name: Deploy to Production
         run: echo "Deploy applications..."
+
+
+
+
