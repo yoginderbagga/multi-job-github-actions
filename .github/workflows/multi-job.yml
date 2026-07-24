@@ -5,18 +5,30 @@ on:
   push: 
     branches: [ "main" ]
 
+
+    # ENV VARIABLE GLOBAL SCOPE : available in all jobs and all the steps
+env:
+  GLOBAL_APP_NAME: "MyAmazingApp"  
+
 jobs:
 
 # 1. Build the job
   build:
     runs-on: ubuntu-latest
+
+    # ENV VARIABLE JOB SCOPE : available only inside the build job
+    env:
+      BUILD_ENVIRONMENT: "staging"
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
 
 
       - name: Compile and Build Application
-        run: echo "Running build scripts ..."
+        run: |
+          echo "Running build scripts ..."
+          echo "Building the app: $GLOBAL_APP_NAME"
+          echo "Environment is: $BUILD_ENVIRONMENT"
 
 # 2. Test the job (Runs only if the previous Build succeeds)
 
@@ -28,7 +40,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run the tests
-        run: echo "Executing the tests..."
+        run: |
+          echo "Executing the tests, Testing app is : $GLOBAL_APP_NAME"
 
 # 3. Deploying the job (Runs only if the Test succeeds)        
       
