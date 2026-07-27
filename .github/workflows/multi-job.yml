@@ -54,6 +54,7 @@ jobs:
           CURRENT_DATE=$(date +'%Y-%m-%d')
           echo "TODAYS_DATE=$CURRENT_DATE" >> $GITHUB_OUTPUT
           echo "Generated Date in build job: $CURRENT_DATE"
+          echo "Your Secret is True: ${{ secrets.BIG_SECRET_INFO }}"
 
       - name: Identity Check
         run: echo "This workflow was triggered by user ${{ github.actor }}"
